@@ -1,0 +1,10 @@
+<form action="/tasks" method="POST">
+    <input type="text" name="title" placeholder="Название задачи" required>
+    <textarea name="description" placeholder="Описание"></textarea>
+    <select name="status">
+        <option value="Pending">Ожидание</option>
+        <option value="Completed">Выполнено</option>
+    </select>
+    <button type="submit">Добавить задачу</button>
+</form>
+<a href="/">Назад к списку задач</a>
