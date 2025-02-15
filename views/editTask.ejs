@@ -1,4 +1,6 @@
 <form action="/tasks/update/<%= task._id %>" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
     <input type="text" name="title" value="<%= task.title %>" required>
     <textarea name="description"><%= task.description %></textarea>
     <select name="status">
@@ -7,4 +9,3 @@
     </select>
     <button type="submit">Сохранить</button>
 </form>
-<a href="/">Назад</a>

@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список задач</title>
 </head>
 <body>
     <h1>Мои задачи</h1>
-    <ul>
-        <% tasks.forEach(task => { %>
-            <li><%= task.title %> - <%= task.status %></li>
-        <% }); %>
-    </ul>
+
     <ul>
         <% tasks.forEach(task => { %>
             <li>
                 <%= task.title %> - <%= task.status %>
                 <a href="/tasks/edit/<%= task._id %>">✏ Редактировать</a>
                 <form action="/tasks/delete/<%= task._id %>" method="POST" style="display:inline;">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button type="submit" onclick="return confirm('Удалить задачу?')">❌ Удалить</button>
                 </form>
             </li>
         <% }); %>
     </ul>
-    
+
+    <!-- Сообщение об успешном действии -->
+    <% if (typeof success !== 'undefined') { %>
+        <div style="color: green;">
+            <%= success %>
+        </div>
+    <% } %>
+
     <!-- Пагинация -->
     <div>
         <% if (page > 1) { %>
             <a href="/tasks?page=<%= page - 1 %>">⬅ Назад</a>
         <% } %>
+
         <span>Страница <%= page %></span>
-        <% if (tasks.length === limit) { %>
-            <a href="/tasks?page=<%= page + 1 %>">Вперед ➡</a>
+
+        <% if (tasks.length > 0 && tasks.length === limit) { %>
+            <a href="/tasks?page=<%= page + 1 %>">Вперёд ➡</a>
         <% } %>
     </div>
-    
 </body>
 </html>

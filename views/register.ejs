@@ -1,7 +1,9 @@
-<form action="/register" method="POST">
+<h1>Register</h1>
+<form action="/auth/register" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <input type="text" name="name" placeholder="Имя" required>
     <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Пароль" required>
-    <button type="submit">Зарегистрироваться</button>
+    <input type="text" name="role" placeholder="Роль (user/admin)" required>
+    <button type="submit">Register</button>
 </form>
-<a href="/login">Уже есть аккаунт? Войти</a>
